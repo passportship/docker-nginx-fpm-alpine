@@ -2,8 +2,8 @@ FROM alpine:3.19.0
 
 ARG ALPINE_PACKAGES="php83-iconv php83-pdo_mysql php83-pdo_pgsql php83-openssl php83-simplexml"
 ARG COMPOSER_PACKAGES="aws/aws-sdk-php google/cloud-storage"
-ARG PBURL=https://github.com/PrivateBin/PrivateBin/
-ARG RELEASE=1.6.2
+ARG PBURL=https://github.com/passportship/PrivateBin/
+ARG RELEASE=master
 ARG UID=65534
 ARG GID=82
 
@@ -76,6 +76,10 @@ RUN \
         && composer update --no-dev --optimize-autoloader \
         rm composer.* /usr/local/bin/* ;\
     fi \
+    && cp cfg/conf.sample.php cfg/conf.php \
+    && sed -i "s#discussion = true#discussion = false#" cfg/conf.php \
+    && sed -i "s#fileupload = false#fileupload = true#" cfg/conf.php \
+    && sed -i "s#burnafterreadingselected = false#burnafterreadingselected = true#" cfg/conf.php \
     && rm *.md cfg/conf.sample.php \
     && mv bin cfg lib tpl vendor /srv \
     && mkdir -p /srv/data \
