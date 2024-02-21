@@ -80,6 +80,7 @@ RUN \
     && sed -i "s#discussion = true#discussion = false#" cfg/conf.php \
     && sed -i "s#fileupload = false#fileupload = true#" cfg/conf.php \
     && sed -i "s#burnafterreadingselected = false#burnafterreadingselected = true#" cfg/conf.php \
+    && sed -i 's#dir = PATH "data"#dir = "/ebs/privatebin-data"#' cfg/conf.php \
     && rm *.md cfg/conf.sample.php \
     && mv bin cfg lib tpl vendor /srv \
     && mkdir -p /srv/data \
