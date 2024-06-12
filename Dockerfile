@@ -77,6 +77,8 @@ RUN \
         rm composer.* /usr/local/bin/* ;\
     fi \
     && cp cfg/conf.sample.php cfg/conf.php \
+    && sed -i "s#1year = 31536000#3month = 7776000#" cfg/conf.php \
+    && sed -i "s#never = 0##" cfg/conf.php \
     && sed -i "s#discussion = true#discussion = false#" cfg/conf.php \
     && sed -i "s#fileupload = false#fileupload = true#" cfg/conf.php \
     && sed -i "s#burnafterreadingselected = false#burnafterreadingselected = true#" cfg/conf.php \
